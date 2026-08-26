@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { dokumentasiImages, portfolioImages, stats } from "@/data/content";
+import type { SiteContent } from "@/lib/content";
 import { Icon } from "./Icon";
 
 function ThumbGrid({
@@ -36,7 +36,17 @@ function ThumbGrid({
   );
 }
 
-export function PortfolioStats() {
+type Props = {
+  portfolioImages: SiteContent["portfolioImages"];
+  dokumentasiImages: SiteContent["dokumentasiImages"];
+  stats: SiteContent["stats"];
+};
+
+export function PortfolioStats({
+  portfolioImages,
+  dokumentasiImages,
+  stats,
+}: Props) {
   return (
     <section id="portfolio" className="section-pad bg-white">
       <div className="container-site grid gap-8 lg:grid-cols-[1fr_1.1fr_1fr] lg:items-stretch">
@@ -48,7 +58,7 @@ export function PortfolioStats() {
           </p>
           <div className="mt-8 grid grid-cols-2 gap-6">
             {stats.map((s) => (
-              <div key={s.label} className="text-center">
+              <div key={s.id} className="text-center">
                 <span className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-gold-300">
                   <Icon name="award" className="h-5 w-5" />
                 </span>
@@ -62,7 +72,11 @@ export function PortfolioStats() {
         </div>
 
         <div id="dokumentasi">
-          <ThumbGrid title="Dokumentasi Kegiatan" images={dokumentasiImages} id="dokumentasi-grid" />
+          <ThumbGrid
+            title="Dokumentasi Kegiatan"
+            images={dokumentasiImages}
+            id="dokumentasi-grid"
+          />
         </div>
       </div>
     </section>

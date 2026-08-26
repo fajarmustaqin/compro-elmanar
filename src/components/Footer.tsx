@@ -1,7 +1,13 @@
-import { contact, navLinks } from "@/data/content";
+import type { SiteContent } from "@/lib/content";
+import { navLinks } from "@/data/content";
 import { Icon } from "./Icon";
 
-export function Footer() {
+type Props = {
+  contact: NonNullable<SiteContent["contact"]>;
+  companyName?: string;
+};
+
+export function Footer({ contact, companyName = "Elmanar Indonesia Group" }: Props) {
   return (
     <footer className="bg-green-950 text-white">
       <div className="container-site grid gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-5 lg:px-8">
@@ -18,8 +24,8 @@ export function Footer() {
             </span>
           </a>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
-            Holding company yang berkomitmen melayani dengan hati melalui layanan
-            Umrah &amp; Haji, event, edukasi, dan media kreatif.
+            {companyName} — holding company yang berkomitmen melayani dengan hati melalui
+            layanan Umrah &amp; Haji, event, edukasi, dan media kreatif.
           </p>
         </div>
 
@@ -73,7 +79,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10 py-4 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Elmanar Indonesia Group. All rights reserved.
+        © {new Date().getFullYear()} {companyName}. All rights reserved.
       </div>
     </footer>
   );

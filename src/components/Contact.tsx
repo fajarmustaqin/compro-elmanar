@@ -1,8 +1,13 @@
 import Image from "next/image";
-import { contact } from "@/data/content";
+import type { SiteContent } from "@/lib/content";
+import { ContactForm } from "./ContactForm";
 import { Icon } from "./Icon";
 
-export function Contact() {
+type Props = {
+  contact: NonNullable<SiteContent["contact"]>;
+};
+
+export function Contact({ contact }: Props) {
   return (
     <section id="kontak" className="section-pad bg-sand-50">
       <div className="container-site grid gap-8 lg:grid-cols-[1fr_1fr_0.9fr]">
@@ -37,13 +42,14 @@ export function Contact() {
           >
             Hubungi via WhatsApp
           </a>
+          <ContactForm />
         </div>
 
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
           <iframe
             title="Lokasi Elmanar Indonesia Group"
             src="https://maps.google.com/maps?q=Jakarta%20Selatan&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="h-64 w-full border-0 lg:h-full min-h-[260px]"
+            className="h-64 w-full min-h-[260px] border-0 lg:h-full"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
@@ -61,7 +67,10 @@ export function Contact() {
                   <span
                     key={i}
                     className={`rounded-[1px] ${
-                      [0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 20, 21, 22, 23, 24, 6, 8, 12, 16, 18].includes(i)
+                      [
+                        0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 20, 21, 22, 23, 24, 6, 8, 12, 16,
+                        18,
+                      ].includes(i)
                         ? "bg-green-950"
                         : "bg-transparent"
                     }`}
@@ -70,7 +79,9 @@ export function Contact() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-white/80">Scan QR untuk mengikuti media sosial kami.</p>
+              <p className="text-sm text-white/80">
+                Scan QR untuk mengikuti media sosial kami.
+              </p>
               <div className="mt-4 flex gap-3">
                 {["IG", "YT", "FB", "TT"].map((s) => (
                   <span

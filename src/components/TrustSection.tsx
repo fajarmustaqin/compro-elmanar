@@ -1,8 +1,15 @@
 import Image from "next/image";
-import { partners } from "@/data/content";
+import type { SiteContent } from "@/lib/content";
 import { Icon } from "./Icon";
 
-export function TrustSection() {
+type Props = {
+  partners: SiteContent["partners"];
+  testimonials: SiteContent["testimonials"];
+};
+
+export function TrustSection({ partners, testimonials }: Props) {
+  const testimonial = testimonials[0];
+
   return (
     <section id="partner" className="section-pad bg-sand-50">
       <div className="container-site grid gap-8 lg:grid-cols-3">
@@ -25,25 +32,32 @@ export function TrustSection() {
 
         <div className="flex flex-col items-center justify-center rounded-2xl bg-white px-6 py-10 text-center shadow-sm ring-1 ring-black/5">
           <Icon name="quote" className="h-10 w-10 text-gold-400" />
-          <p className="mt-4 font-display text-lg leading-relaxed text-green-900">
-            &ldquo;Pelayanan Elmanar sangat memuaskan. Dari persiapan hingga di Tanah
-            Suci, kami merasa aman dan terbimbing.&rdquo;
-          </p>
-          <div className="mt-6 flex items-center gap-3">
-            <div className="relative h-12 w-12 overflow-hidden rounded-full">
-              <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80"
-                alt="Ahmad Fauzi"
-                fill
-                className="object-cover"
-                sizes="48px"
-              />
-            </div>
-            <div className="text-left">
-              <p className="text-sm font-semibold text-green-900">Ahmad Fauzi</p>
-              <p className="text-xs text-muted">Jemaah Umrah 2024</p>
-            </div>
-          </div>
+          {testimonial ? (
+            <>
+              <p className="mt-4 font-display text-lg leading-relaxed text-green-900">
+                &ldquo;{testimonial.message}&rdquo;
+              </p>
+              <div className="mt-6 flex items-center gap-3">
+                {testimonial.avatarUrl && (
+                  <div className="relative h-12 w-12 overflow-hidden rounded-full">
+                    <Image
+                      src={testimonial.avatarUrl}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                      sizes="48px"
+                    />
+                  </div>
+                )}
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-green-900">{testimonial.name}</p>
+                  <p className="text-xs text-muted">{testimonial.role}</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">Belum ada testimoni.</p>
+          )}
           <div className="mt-5 flex gap-1.5">
             {[0, 1, 2].map((i) => (
               <span

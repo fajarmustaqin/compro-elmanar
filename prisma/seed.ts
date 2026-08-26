@@ -1,5 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
+if (!process.env.DATABASE_URL || !process.env.DATABASE_URL.trim()) {
+  process.env.DATABASE_URL = "file:/data/prod.db";
+}
+
 const prisma = new PrismaClient();
 
 async function main() {

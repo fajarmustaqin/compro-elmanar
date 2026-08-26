@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
@@ -35,6 +36,10 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
+  if (!(await isAdminAuthenticated())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const messages = await prisma.contactMessage.findMany({
       orderBy: { createdAt: "desc" },
@@ -43,9 +48,6 @@ export async function GET() {
     return NextResponse.json(messages);
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { error: "Gagal mengambil pesan" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Gagal mengambil pesan" }, { status: 500 });
   }
 }

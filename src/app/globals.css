@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --green-950: #06261c;
+  --green-900: #0a3d2e;
+  --green-800: #0d4f3a;
+  --green-700: #146b4f;
+  --green-600: #1a7a5a;
+  --gold-500: #c9a24a;
+  --gold-400: #d4b45e;
+  --gold-300: #e0c87a;
+  --sand-100: #f5f2eb;
+  --sand-50: #faf9f6;
+  --muted: #5c6b64;
+  --foreground: #1a2e26;
+  --background: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-green-950: var(--green-950);
+  --color-green-900: var(--green-900);
+  --color-green-800: var(--green-800);
+  --color-green-700: var(--green-700);
+  --color-green-600: var(--green-600);
+  --color-gold-500: var(--gold-500);
+  --color-gold-400: var(--gold-400);
+  --color-gold-300: var(--gold-300);
+  --color-sand-100: var(--sand-100);
+  --color-sand-50: var(--sand-50);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-display);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold-500) 35%, transparent);
+}
+
+.section-pad {
+  @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-20;
+}
+
+.container-site {
+  @apply mx-auto w-full max-w-7xl;
+}
+
+.heading-section {
+  @apply font-display text-2xl font-semibold tracking-tight text-green-900 sm:text-3xl;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-md bg-green-800 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition hover:bg-green-700;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center rounded-md bg-gold-500 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition hover:bg-gold-400;
+}
+
+.btn-outline-light {
+  @apply inline-flex items-center justify-center rounded-md border border-white/80 bg-transparent px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10;
+}
+
+.btn-outline-dark {
+  @apply inline-flex items-center justify-center rounded-md border border-green-800 bg-transparent px-5 py-2.5 text-sm font-semibold tracking-wide text-green-800 transition hover:bg-green-800 hover:text-white;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.1s;
+}
+.animate-delay-2 {
+  animation-delay: 0.2s;
+}
+.animate-delay-3 {
+  animation-delay: 0.3s;
+}

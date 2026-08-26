@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SiteSetting {
+  id          Int      @id @default(1)
+  companyName String   @default("Elmanar Indonesia Group")
+  tagline     String   @default("Melayani dengan Hati, Menginspirasi Negeri")
+  about       String
+  vision      String
+  directorName String  @default("H. Ahmad Elmanar")
+  directorTitle String @default("Direktur Utama")
+  directorMessage String
+  phone       String
+  email       String
+  website     String
+  address     String
+  whatsapp    String
+  updatedAt   DateTime @updatedAt
+}
+
+model HistoryMilestone {
+  id        Int    @id @default(autoincrement())
+  year      String
+  title     String
+  desc      String
+  sortOrder Int    @default(0)
+}
+
+model Mission {
+  id        Int    @id @default(autoincrement())
+  text      String
+  sortOrder Int    @default(0)
+}
+
+model CoreValue {
+  id        Int    @id @default(autoincrement())
+  title     String
+  icon      String
+  sortOrder Int    @default(0)
+}
+
+model OrgUnit {
+  id        Int    @id @default(autoincrement())
+  name      String
+  sortOrder Int    @default(0)
+}
+
+model BusinessUnit {
+  id        Int    @id @default(autoincrement())
+  title     String
+  desc      String
+  image     String
+  sortOrder Int    @default(0)
+  isActive  Boolean @default(true)
+}
+
+model Stat {
+  id        Int    @id @default(autoincrement())
+  value     String
+  label     String
+  sortOrder Int    @default(0)
+}
+
+model GalleryItem {
+  id        Int    @id @default(autoincrement())
+  type      String // portfolio | dokumentasi
+  imageUrl  String
+  title     String?
+  sortOrder Int    @default(0)
+}
+
+model Partner {
+  id        Int    @id @default(autoincrement())
+  name      String
+  logoUrl   String?
+  sortOrder Int    @default(0)
+}
+
+model RoadmapItem {
+  id        Int    @id @default(autoincrement())
+  year      String
+  title     String
+  desc      String
+  sortOrder Int    @default(0)
+}
+
+model WhyUsItem {
+  id        Int    @id @default(autoincrement())
+  title     String
+  icon      String
+  sortOrder Int    @default(0)
+}
+
+model Testimonial {
+  id        Int     @id @default(autoincrement())
+  name      String
+  role      String
+  message   String
+  avatarUrl String?
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+  isRead    Boolean  @default(false)
+}
